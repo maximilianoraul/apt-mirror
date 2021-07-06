@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+  aptmirror:
+    image: maximilianoraul:aptmirror
+    build:
+      context: ./build/
+      dockerfile: Dockerfile-aptmirror
+    volumes:
+      - ./mirror:/var/spool/apt-mirror/mirror
+      - ./apt/mirror.list:/etc/apt/mirror.list
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - 8082:80
+    volumes:
+      - ./mirror/:/mirror/
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      - ./nginx/log/:/var/log/nginx/

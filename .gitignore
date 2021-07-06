@@ -1,0 +1,4 @@
+# Docker prod config
+docker-compose.yml
+
+cron.log
